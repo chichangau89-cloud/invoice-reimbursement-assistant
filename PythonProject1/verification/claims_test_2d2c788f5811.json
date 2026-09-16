@@ -1,0 +1,164 @@
+{
+  "tenant_id": "claims_test_2d2c788f5811",
+  "checks": [
+    {
+      "method": "POST",
+      "url": "/api/claims",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "url": "/api/claims",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "url": "/api/claims/TEST-001",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "url": "/api/audits/claims/MISSING/run",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "url": "/api/invoices/import",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/claims/TEST-001",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "/api/audits/claims/TEST-001/run",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/19866592148942328c5f717429a87f19",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/19866592148942328c5f717429a87f19",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "url": "/api/claims/TEST-001",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "url": "/api/claims/TEST-001",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "url": "/api/claims/TEST-001",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/19866592148942328c5f717429a87f19",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "/api/audits/claims/TEST-001/run",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/claims/TEST-001",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/claims/TEST-001",
+      "status": 200
+    }
+  ],
+  "first_audit": {
+    "claim_no": "TEST-001",
+    "tenant_id": "claims_test_2d2c788f5811",
+    "decision": "approved",
+    "risk_level": "low",
+    "check_results": [
+      {
+        "check_type": "duplicate_invoice",
+        "status": "pass",
+        "risk_level": "low",
+        "message": "未发现同租户下相同发票号和开票日期的其他报销单。",
+        "evidences": [],
+        "suggestions": []
+      }
+    ],
+    "policy_hits": [],
+    "report_markdown": "# 报销单 TEST-001 审核报告\n- 租户：claims_test_2d2c788f5811\n- 结论：approved\n- 风险等级：low\n\n## 检查结果\n- duplicate_invoice: pass，未发现同租户下相同发票号和开票日期的其他报销单。\n\n## 大模型辅助说明（以结构化规则结果为准）\n本次审核执行了重复发票检查，结果为通过。系统未发现同租户下存在相同发票号和开票日期的其他报销单，风险等级为低。未命中任何制度条款，无需引用政策 ID。",
+    "llm_report": {
+      "status": "generated",
+      "model": "qwen3.5-plus",
+      "explanation": {
+        "summary": "本次审核执行了重复发票检查，结果为通过。系统未发现同租户下存在相同发票号和开票日期的其他报销单，风险等级为低。未命中任何制度条款，无需引用政策 ID。",
+        "cited_policy_ids": []
+      },
+      "usage": {
+        "total_tokens": 367,
+        "prompt_tokens": 311,
+        "completion_tokens": 56
+      },
+      "error_code": null
+    },
+    "audit_id": "19866592148942328c5f717429a87f19",
+    "claim_version": 2,
+    "stale": false,
+    "created_at": "2026-09-16T01:18:13.360822",
+    "input_snapshot": {
+      "claim": {
+        "amount": "680.00",
+        "status": "draft",
+        "version": 2,
+        "claim_no": "TEST-001",
+        "currency": "CNY",
+        "tenant_id": "claims_test_2d2c788f5811",
+        "created_at": "2026-09-16 01:17:54.021214",
+        "department": "测试部门",
+        "updated_at": "2026-09-16 01:17:54.752532",
+        "expense_type": "travel",
+        "applicant_name": "测试员工",
+        "approval_status": "pending",
+        "latest_audit_id": null,
+        "business_purpose": "集成测试，不是真实报销"
+      },
+      "request": {
+        "use_llm": true,
+        "tenant_id": "claims_test_2d2c788f5811",
+        "policy_question": null
+      },
+      "invoices": [
+        {
+          "claim_no": "TEST-001",
+          "currency": "CNY",
+          "record_id": "422a365af326e0e25fe4b75b799af3932f4dd1882c19e749f99c52cdc8f0928f",
+          "tenant_id": "claims_test_2d2c788f5811",
+          "buyer_name": "测试公司",
+          "created_at": "2026-09-16 01:17:54",
+          "invoice_no": "TEST-INV-001",
+          "issue_date": "2026-09-16",
+          "updated_at": "2026-09-16 01:17:54",
+          "seller_name": "测试酒店",
+          "total_amount": "680.00"
+        }
+      ],
+      "attachments": [],
+      "rule_version": "duplicate-invoice-v1",
+      "pipeline_version": "claims-persistence-v1"
+    }
+  },
+  "second_audit_id": "8a5964d1beb845a2a9d8a3f1cfcb39a1",
+  "stale_audit_id": "db2f3486b6e74f7db3fa3b85b0bf1bac"
+}

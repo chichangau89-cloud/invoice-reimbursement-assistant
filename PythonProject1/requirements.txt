@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+python-dotenv
+pypdf
+pytesseract
+Pillow
+PyMuPDF
+# pymilvus
+# sentence-transformers

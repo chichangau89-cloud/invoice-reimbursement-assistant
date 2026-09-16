@@ -1,0 +1,611 @@
+{
+  "decision": "manual_review",
+  "decision_label": "需人工复核",
+  "eligible_for_auto_approval": false,
+  "risk_level": "medium",
+  "policy_version": "V1.0-draft-7b4c68429f15",
+  "policy_status": "draft",
+  "checks": [
+    {
+      "rule_id": "M01",
+      "status": "needs_evidence",
+      "message": "未识别到发票；无法执行金额、票号和购方核验。",
+      "values": {},
+      "basis": {
+        "file": "材料交叉校验",
+        "section": "提交材料与数据库记录",
+        "version": "runtime",
+        "line_start": 0,
+        "line_end": 0,
+        "condition": "未识别到发票；无法执行金额、票号和购方核验。",
+        "evidence_required": "上传原始材料并人工核验",
+        "action": "补充或人工复核"
+      }
+    },
+    {
+      "rule_id": "M02",
+      "status": "needs_evidence",
+      "message": "差旅类报销需关联行程单、酒店水单或交通凭证。",
+      "values": {},
+      "basis": {
+        "file": "材料交叉校验",
+        "section": "提交材料与数据库记录",
+        "version": "runtime",
+        "line_start": 0,
+        "line_end": 0,
+        "condition": "差旅类报销需关联行程单、酒店水单或交通凭证。",
+        "evidence_required": "上传原始材料并人工核验",
+        "action": "补充或人工复核"
+      }
+    },
+    {
+      "rule_id": "M04",
+      "status": "needs_evidence",
+      "message": "缺少当前租户、发票号码或开票日期，未做精确历史查重。",
+      "values": {},
+      "basis": {
+        "file": "材料交叉校验",
+        "section": "提交材料与数据库记录",
+        "version": "runtime",
+        "line_start": 0,
+        "line_end": 0,
+        "condition": "缺少当前租户、发票号码或开票日期，未做精确历史查重。",
+        "evidence_required": "上传原始材料并人工核验",
+        "action": "补充或人工复核"
+      }
+    },
+    {
+      "rule_id": "R01",
+      "status": "flagged",
+      "message": "缺少：票号、金额、开票日期、购方名称、项目、业务用途",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "法人、项目、用途或金额缺失",
+        "evidence_required": "报销明细",
+        "action": "退回补正"
+      }
+    },
+    {
+      "rule_id": "R02",
+      "status": "needs_evidence",
+      "message": "缺少比较金额，不能判断是否触发材料要求",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "发票原金额>1000元",
+        "evidence_required": "支付证明",
+        "action": "缺失则退回"
+      }
+    },
+    {
+      "rule_id": "R03",
+      "status": "needs_evidence",
+      "message": "缺少比较金额，不能判断是否触发材料要求",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "同供应商同事项累计>10000元",
+        "evidence_required": "合同",
+        "action": "缺失则退回；聚合为企业补充"
+      }
+    },
+    {
+      "rule_id": "R04",
+      "status": "not_applicable",
+      "message": "未选择物品采购；费用分类需人工确认",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "单件不含税单价>5000元",
+        "evidence_required": "清单、验收及资产判断",
+        "action": "转财务分类，不直接拒报"
+      }
+    },
+    {
+      "rule_id": "R05",
+      "status": "not_applicable",
+      "message": "本次未申报招待费用",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "招待用餐实际总额>3000元",
+        "evidence_required": "申请、发票、明细",
+        "action": "不允许核减绕过，转授权财务处理"
+      }
+    },
+    {
+      "rule_id": "R06",
+      "status": "not_applicable",
+      "message": "本次未申报招待费用",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "连号招待发票",
+        "evidence_required": "全组发票及业务说明",
+        "action": "关联审核同单；合计>1000补付款证据"
+      }
+    },
+    {
+      "rule_id": "R07",
+      "status": "not_applicable",
+      "message": "本次未申报招待费用",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "招待事前审批晚于消费/发票/支付",
+        "evidence_required": "审批时间及交易证据",
+        "action": "退回或人工复核，不伪造补批"
+      }
+    },
+    {
+      "rule_id": "R08",
+      "status": "not_applicable",
+      "message": "借款业务须单独提供在途与结清台账",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "同员工同项目已有有效在途借款",
+        "evidence_required": "借款台账",
+        "action": "拦截新增借款"
+      }
+    },
+    {
+      "rule_id": "R09",
+      "status": "not_applicable",
+      "message": "借款业务须单独提供在途与结清台账",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "事项完成后超过5个工作日未清借款",
+        "evidence_required": "办结日、还款核销记录",
+        "action": "催清并暂停普通新借款"
+      }
+    },
+    {
+      "rule_id": "R10",
+      "status": "needs_evidence",
+      "message": "需按人按日核对市内车费与交通补助，重叠日扣40元；城际票不适用",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "当日市内打车已由企业承担",
+        "evidence_required": "按人按日行程台账",
+        "action": "核减当日交通补助40元"
+      }
+    },
+    {
+      "rule_id": "R11",
+      "status": "not_applicable",
+      "message": "自驾比较规则仅适用于因公自驾",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "自驾有高铁、费用合计超比较价",
+        "evidence_required": "票价截图、全项支出",
+        "action": "合计核减至适用比较价"
+      }
+    },
+    {
+      "rule_id": "R12",
+      "status": "not_applicable",
+      "message": "需区分个人通讯补助与企业通信服务",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "个人通讯补助再次贴票",
+        "evidence_required": "工资和补助台账",
+        "action": "核实重复，确认后不予重复报销"
+      }
+    },
+    {
+      "rule_id": "R13",
+      "status": "needs_evidence",
+      "message": "个体工商户风险需增强核验，不能据此认定假票",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "个体工商户票据风险提示",
+        "evidence_required": "交易、经营及付款证据",
+        "action": "增强人工核验"
+      }
+    },
+    {
+      "rule_id": "R14",
+      "status": "needs_evidence",
+      "message": "需核对跨单历史记录、退款和合法分摊，不能仅凭相似度查重",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "票据重复或累计申报超可分摊金额",
+        "evidence_required": "历史单、退款及分摊记录",
+        "action": "暂停、复核；确认重复后拒重复部分"
+      }
+    },
+    {
+      "rule_id": "R15",
+      "status": "needs_evidence",
+      "message": "跨年或逾期需人工核对结转清单、特殊类别时限",
+      "values": {
+        "issue_date": "None",
+        "submitted_date": "2026-09-16",
+        "ordinary_deadline": "None"
+      },
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "超年度或招待跨年时限",
+        "evidence_required": "发生日、票日、提交日、结转清单",
+        "action": "逾期人工复核"
+      }
+    },
+    {
+      "rule_id": "R16",
+      "status": "not_applicable",
+      "message": "燃油充值需按预付流程核销",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "充值票据当成燃油消耗",
+        "evidence_required": "实际消费记录",
+        "action": "退回改预付或补消费凭证"
+      }
+    },
+    {
+      "rule_id": "R17",
+      "status": "needs_evidence",
+      "message": "文件为PDF不代表已取得开票原件，需核验原始电子凭证",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "只有电子凭证截图",
+        "evidence_required": "原始电子文件",
+        "action": "补原件；不能仅截图完成电子归档"
+      }
+    },
+    {
+      "rule_id": "R18",
+      "status": "flagged",
+      "message": "当前制度为未签发草案，且含待确认口径，必须人工复核",
+      "values": {},
+      "basis": {
+        "file": "报销制度07_审核规则与配套表单.md",
+        "section": "二、执行规则表",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 15,
+        "line_end": 38,
+        "clause_id": "fc6c41ec0bd1f9d101c568079fc7cbb3ae22ba263aaa60c4fdcda90434e621ed",
+        "condition": "标准缺失、原文冲突、税务不确定",
+        "evidence_required": "当前签发版本及证据",
+        "action": "人工复核，不自动套默认税率"
+      }
+    },
+    {
+      "rule_id": "LODGING",
+      "status": "needs_evidence",
+      "message": "需提供人员档位、城市、实际住宿夜数及房费，不能拿发票总额直接套住宿标准",
+      "values": {},
+      "basis": {
+        "file": "报销制度02_差旅费与交通补助管理办法.md",
+        "section": "第二条 境内标准",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 10,
+        "line_end": 20,
+        "clause_id": "2e37950702ec7ff8073a784b7805fc95a01b9f8b2124be0a9bda3920cca1e7c6",
+        "condition": "第二条 境内标准",
+        "evidence_required": "",
+        "action": "按适用档位和实际人夜审核"
+      }
+    },
+    {
+      "rule_id": "HOTEL_ATTACHMENT",
+      "status": "needs_evidence",
+      "message": "需提供酒店水单和真实入住人夜记录",
+      "values": {},
+      "basis": {
+        "file": "报销制度02_差旅费与交通补助管理办法.md",
+        "section": "第二条 境内标准",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 10,
+        "line_end": 20,
+        "clause_id": "2e37950702ec7ff8073a784b7805fc95a01b9f8b2124be0a9bda3920cca1e7c6",
+        "condition": "第二条 境内标准",
+        "evidence_required": "",
+        "action": "按适用档位和实际人夜审核"
+      }
+    },
+    {
+      "rule_id": "AUTHENTICITY",
+      "status": "needs_evidence",
+      "message": "尚未接入官方验真、预算、历史台账与审批证据验证；未发现问题不等于合规通过",
+      "values": {},
+      "basis": {
+        "file": "报销制度06_发票附件与档案管理办法.md",
+        "section": "第二条 验真与查重",
+        "version": "V1.0-draft-7b4c68429f15",
+        "line_start": 14,
+        "line_end": 20,
+        "clause_id": "c7313ac94733805b7949e068b596821e985567a1332dd74f80f8dcd02eb8d63d",
+        "condition": "第二条 验真与查重",
+        "evidence_required": "",
+        "action": "按适用档位和实际人夜审核"
+      }
+    }
+  ],
+  "reasons": [
+    {
+      "code": "R01",
+      "message": "缺少：票号、金额、开票日期、购方名称、项目、业务用途"
+    },
+    {
+      "code": "R02",
+      "message": "缺少比较金额，不能判断是否触发材料要求"
+    },
+    {
+      "code": "R03",
+      "message": "缺少比较金额，不能判断是否触发材料要求"
+    },
+    {
+      "code": "R10",
+      "message": "需按人按日核对市内车费与交通补助，重叠日扣40元；城际票不适用"
+    },
+    {
+      "code": "R13",
+      "message": "个体工商户风险需增强核验，不能据此认定假票"
+    },
+    {
+      "code": "R14",
+      "message": "需核对跨单历史记录、退款和合法分摊，不能仅凭相似度查重"
+    },
+    {
+      "code": "R15",
+      "message": "跨年或逾期需人工核对结转清单、特殊类别时限"
+    },
+    {
+      "code": "R17",
+      "message": "文件为PDF不代表已取得开票原件，需核验原始电子凭证"
+    },
+    {
+      "code": "R18",
+      "message": "当前制度为未签发草案，且含待确认口径，必须人工复核"
+    },
+    {
+      "code": "LODGING",
+      "message": "需提供人员档位、城市、实际住宿夜数及房费，不能拿发票总额直接套住宿标准"
+    },
+    {
+      "code": "HOTEL_ATTACHMENT",
+      "message": "需提供酒店水单和真实入住人夜记录"
+    },
+    {
+      "code": "AUTHENTICITY",
+      "message": "尚未接入官方验真、预算、历史台账与审批证据验证；未发现问题不等于合规通过"
+    }
+  ],
+  "summary": "已识别 2 份材料；执行 24 项检查。已执行21项检查，12项需处理或补充证据。草案预审不等于最终审批。",
+  "context_source": "用户申报，未独立核验",
+  "policy_hits": [
+    {
+      "id": "2e37950702ec7ff8073a784b7805fc95a01b9f8b2124be0a9bda3920cca1e7c6",
+      "source_id": "报销制度02_差旅费与交通补助管理办法.md",
+      "source_version": "V1.0-draft-7b4c68429f15",
+      "title": "差旅费与交通补助管理办法 / 第二条 境内标准",
+      "content": "来源文件：报销制度02_差旅费与交通补助管理办法.md\n状态：企业适配草案（未签发）\n# 差旅费与交通补助管理办法\n\n制度编号：BX-02 ｜ 版本：V1.0 ｜ 状态：企业适配草案  \n依据：培训第31—37、41—47、65—66、73—78页。以下简化档位为建议适配标准，不等同于原企业职位映射。\n\n## 第二条 境内标准\n\n| 建议档位 | 适用人员 | 普通列车 | 高铁/动车 | 飞机 | 一般地区住宿 | 北京上海广州深圳住宿 | 每日补助 |\n|---|---|---|---|---|---:|---:|---:|\n| A | 一般员工 | 硬座/硬卧 | 二等座 | 经济舱 | 400元/人夜 | 450元/人夜 | 100元 |\n| B | 经人力确认的中层岗位 | 软座/软卧 | 二等座 | 经济舱 | 450元/人夜 | 550元/人夜 | 100元 |\n| C | 经人力确认的高级管理岗位 | 软座/软卧 | 一等座 | 经济舱 | 550元/人夜 | 650元/人夜 | 不发放 |\n\n以上金额参考培训第43、45—47页，档位属于通用化重组。企业应明确每个岗位唯一档位；未配置时不得默认授予高档标准。境外出差和特殊职级另行审批预算，本表不直接套用。\n\n住宿按实际住宿夜数、符合条件的实际金额及人均上限取低报销，不住店不发住宿包干款。多人合住不得重复申报同一账单。免费安排住宿的不另报住宿费。酒店发票附水单，列明姓名、入住退房时间和房费明细。",
+      "content_hash": "fb3d0a481752d7b87043f246763741a7c3a4cb0da1cdb209d7e32203183001b4",
+      "chunk_no": 2,
+      "score": 0.6374819278717041
+    },
+    {
+      "id": "a85b3596f25c44759478eeb71ad1c6e9f586d66821795674b2afca4de9148c41",
+      "source_id": "报销制度03_业务招待费管理办法.md",
+      "source_version": "V1.0-draft-7b4c68429f15",
+      "title": "业务招待费管理办法 / 第二条 用餐限额",
+      "content": "来源文件：报销制度03_业务招待费管理办法.md\n状态：企业适配草案（未签发）\n# 业务招待费管理办法\n\n制度编号：BX-03 ｜ 版本：V1.0 ｜ 状态：企业适配草案  \n依据：培训第6、63、67—72页。第68页旧表含酒水和纪念品，第69页明确禁止；本草案采用禁止清单，并保留冲突记录。\n\n## 第二条 用餐限额\n\n| 招待类型 | 每人每次用餐参考上限 |\n|---|---:|\n| 商务一般客人 | 200元 |\n| 商务重要客户 | 300元 |\n| 商务贵宾 | 600元 |\n| 外事招待 | 600元 |\n| 其他公务一般客人 | 200元 |\n| 其他公务贵宾 | 400元 |\n\n金额取自培训第68页，用途分类和人员资格须在事前申请中确认，员工不得自行提高类别。其他公务、外事及涉及特殊接待对象的事项，财务和合规负责人应先核实是否适用更严格专门规定。\n\n本草案建议将人数定义为实际用餐总人数，包含陪同人员，申请中分别列外部与内部人数；人均口径属企业补充。用餐须同时满足事前预算、人均限额和单次事项3000元总额上限。单次事项不因分桌、分票、分部门或更换报销人而扩大上限。\n\n培训第69页明确：招待用餐报销单金额不得超过3000元，不可通过核减金额使超额单据通过。实际发生额超过3000元的，整项暂停进入普通报销，交财务按正式制度处理，不能把3200元单据直接改报3000元。住宿和用车不能伪装成餐饮以挪用额度，须单独列明并按批准预算审核。",
+      "content_hash": "bc080b659fcd28268226eece35e5a8bf08733cf3254bdba3e7e550619459b858",
+      "chunk_no": 2,
+      "score": 0.5087805986404419
+    },
+    {
+      "id": "2781ba547e478a1167f456ca6dc74fc7b58b0c812bf43af38133e5259c58128a",
+      "source_id": "报销制度05_日常经营费用报销细则.md",
+      "source_version": "V1.0-draft-7b4c68429f15",
+      "title": "日常经营费用报销细则 / 第二条 办公及会议",
+      "content": "来源文件：报销制度05_日常经营费用报销细则.md\n状态：企业适配草案（未签发）\n# 日常经营费用报销细则\n\n制度编号：BX-05 ｜ 版本：V1.0 ｜ 状态：企业适配草案  \n依据：培训第8、38、63、79—83页；采购验收与资产登记流程为企业补充。\n\n## 第二条 办公及会议\n\n| 费用 | 主要附件及审核要求 |\n|---|---|\n| 书报资料、办公耗材、饮用水、清洁用品 | 发票、品名数量单价清单、采购用途及验收确认 |\n| 电脑配件、设备 | 发票、清单、验收；触发资产审核的办理登记 |\n| 修理维修 | 发票、维修对象、项目和明细、完工确认 |\n| 公司固定电话、网络 | 发票、账期明细、合同或服务协议；个人通讯补助不在此重复报销 |\n| 邮寄运输 | 发票、运单/明细、业务用途；月结附对账单 |\n| 软件及会员 | 合同或订单、发票、账号归属、期限和交付证明；长期或达到资产条件的交财务判断 |\n| 打印及租赁 | 发票、数量单价清单、租赁协议或结算单 |\n| 会议 | 通知、批准预算、参加人数、场地/餐宿/资料明细及发票 |\n\n培训中软件“不含税单价不超5000元且使用期不超1年”仅作为费用类候选范围，不构成完整会计分类规则。订阅自动续费前确认预算和实际使用情况。",
+      "content_hash": "75b186f321d0a44c7a53ee1891193cda3ecaaa7d05d5aa615f8efbe2fe9d4cb3",
+      "chunk_no": 2,
+      "score": 0.4771297872066498
+    },
+    {
+      "id": "a9ede983347adba00601d2b502238857dc7bf7727f5ca28b455562a3bc87fe52",
+      "source_id": "报销制度02_差旅费与交通补助管理办法.md",
+      "source_version": "V1.0-draft-7b4c68429f15",
+      "title": "差旅费与交通补助管理办法 / 第三条 补助和重复扣减",
+      "content": "来源文件：报销制度02_差旅费与交通补助管理办法.md\n状态：企业适配草案（未签发）\n# 差旅费与交通补助管理办法\n\n制度编号：BX-02 ｜ 版本：V1.0 ｜ 状态：企业适配草案  \n依据：培训第31—37、41—47、65—66、73—78页。以下简化档位为建议适配标准，不等同于原企业职位映射。\n\n## 第三条 补助和重复扣减\n\nA、B档按餐补60元/日、交通补助40元/日计算。天数不得超过批准且实际执行的出差天数；变更先补充申请。建议自然日计数，出发和返程同日算1天，同日多段出差不重复计天。\n\n当天已报销出差目的地市内打车费用的，扣当天交通补助40元；城际火车和飞机票不据此扣交通补助。当天餐费由企业另行承担时不重复领该日餐补（企业补充）。目的地包食包行时按培训原则仅计算首尾两日，仍按实际供给去重；一天往返最多1天。多人共乘由一人报销并注明同行者，所有由企业承担该段车费的同行者统一复核补助，防止换人提单重复领取。\n\n算例：A档出差3天、住宿2夜，普通地区房费每夜380元；其中1天报销市内打车50元，无其他减免。住宿760元，补助3×100−40＝260元，市内打车50元，合计1070元，另加符合标准的城际交通。",
+      "content_hash": "1db205552c2a7685a0128cb719933a2b6a0623fc85bef7d811e53a77c5aae762",
+      "chunk_no": 3,
+      "score": 0.47571587562561035
+    },
+    {
+      "id": "2bf531d0f099b19b44d5b9bc6a015b6273a0f8448712182fccde359a96680222",
+      "source_id": "报销制度05_日常经营费用报销细则.md",
+      "source_version": "V1.0-draft-7b4c68429f15",
+      "title": "日常经营费用报销细则 / 第三条 物业及租赁",
+      "content": "来源文件：报销制度05_日常经营费用报销细则.md\n状态：企业适配草案（未签发）\n# 日常经营费用报销细则\n\n制度编号：BX-05 ｜ 版本：V1.0 ｜ 状态：企业适配草案  \n依据：培训第8、38、63、79—83页；采购验收与资产登记流程为企业补充。\n\n## 第三条 物业及租赁\n\n租金附双方签署合同、发票、期间及房屋信息；押金单独列示并保存收据，不直接当租金费用核销。原则上向出租方付款，委托第三方收款须提供双方有效授权及身份核验。\n\n宿舍备注小区和房间号；沿用培训内部标准仅承担宿舍房租和物业管理费，个人水电燃气不纳入，另有正式福利制度的依批准制度执行。\n\n办公物业、水电、排污附缴费明细及适用合同；保洁保安附服务合同、考勤或服务验收；绿植附清单和验收。租赁的资产确认、计量及科目由财务按适用准则判断，不直接把培训“原值4万元、租期超过1年”作为统一法定门槛。",
+      "content_hash": "ecc847b6eeba0193db6822eaeb5a945a57aaae2f24b1d0b9cb9fcb16078e4a4c",
+      "chunk_no": 3,
+      "score": 0.44377490878105164
+    }
+  ],
+  "policy_source": "milvus+mysql",
+  "documents": [
+    {
+      "filename": "b4685a15c47c429c976e800d8c1ba140.pdf",
+      "kind": "other",
+      "recognized": false,
+      "ocr_method": "unavailable",
+      "raw_text_length": 0,
+      "fields": {}
+    },
+    {
+      "filename": "b4685a15c47c429c976e800d8c1ba140.pdf",
+      "kind": "other",
+      "recognized": false,
+      "ocr_method": "unavailable",
+      "raw_text_length": 0,
+      "fields": {}
+    }
+  ],
+  "retrievals": [
+    {
+      "channel": "mysql_exact_invoice",
+      "status": "not_run",
+      "reason": "缺少当前租户、发票号码或开票日期，未做精确历史查重。",
+      "items": []
+    },
+    {
+      "channel": "milvus_policy",
+      "status": "ok",
+      "query": "other other",
+      "items": [
+        {
+          "id": "804946f7593c6ccbb48523c5a37a9e9cb88c189b73ca83ddf377fefad11e335d",
+          "source_id": "报销制度00_制度目录与编制说明.md",
+          "source_version": "V1.0-draft-7b4c68429f15",
+          "title": "企业费用报销制度汇编：目录与编制说明 / 四、外部核验记录",
+          "content": "来源文件：报销制度00_制度目录与编制说明.md\n状态：企业适配草案（未签发）\n# 企业费用报销制度汇编：目录与编制说明\n\n版本：V1.0（企业适配草案）  \n编制日期：2026年9月16日  \n适用范围：中国大陆境内企业及所属部门、项目。公司名称、生效日期和最终签发人由企业发布时登记；本套文件目前不是已生效的公司制度。\n\n## 四、外部核验记录\n\n核验日期：2026年9月16日，仅核验以下事项，不代表已完成全部税务和劳动规则审查。\n\n- 铁路纸质报销凭证的过渡安排针对乘车日期在2025年9月30日前的铁路车票，不应把培训中的“过渡期并行”设为永久规则。[国家税务总局官方问答](https://www.chinatax.gov.cn/chinatax/n810356/n3010387/c5235580/content.html)\n- 电子凭证应保存电子原件；采用打印件报销归档时仍应保存对应电子凭证。仅电子归档应满足真实性、完整性、防重复入账及档案管理等要求。[财政部、国家档案局财会〔2020〕6号](https://www.mof.gov.cn/zcsjtsgb/gfxwj/202003/t20200323_3583778.htm)",
+          "content_hash": "272d437d785b8b39b88f8b8f43cae58264e55b36c6dffd9a95f332584f8237a6",
+          "chunk_no": 4,
+          "score": 0.2549627423286438
+        },
+        {
+          "id": "4b0cebdd9abcd195a2b0595d5ea759e4a2fa742242017a2d0647a4729fcdc9b9",
+          "source_id": "报销制度08_来源对照与发布确认清单.md",
+          "source_version": "V1.0-draft-7b4c68429f15",
+          "title": "来源对照、冲突处理与发布确认清单 / 四、发布确认记录",
+          "content": "来源文件：报销制度08_来源对照与发布确认清单.md\n状态：企业适配草案（未签发）\n# 来源对照、冲突处理与发布确认清单\n\n版本：V1.0 ｜ 编制日期：2026年9月16日  \n本文件记录草案的证据边界，与其他制度同版本维护。\n\n## 四、发布确认记录\n\n| 必须确认项 | 责任部门 | 记录 |\n|---|---|---|\n| 公司名称、适用法人/员工范围、正式生效日期 | 综合管理 | 待确认 |\n| 文件版本、签发人、被替代制度和解释部门 | 综合管理/财务 | 待确认 |\n| 授权矩阵、独立审批人、代理权限 | 管理层 | 待确认 |\n| 标准档位、人力映射、通勤及宿舍补助互斥 | 人力/财务 | 待确认 |\n| 招待标准、禁止清单和跨年规则 | 财务/合规 | 待确认 |\n| 借款项目分类、额度与清理周期 | 财务/项目管理 | 待确认 |\n| 票据及税务口径、资产/租赁会计处理 | 财务 | 待确认 |\n| 档案接收地址、系统入口、保管期限表 | 档案/信息化 | 待确认 |\n| 现有余额、旧申请和新制度切换安排 | 财务/信息化 | 待确认 |\n\n建议经财务起草、人力与相关业务会签、授权管理层签发后发布；涉及员工权益的内容另履行适用程序。生效前已批准且未执行完毕事项明确采用哪个版本，不默默追溯改变标准。",
+          "content_hash": "82e5cbc375498ae1d79fce067f57fcebcac2198fa1fd4ee36263013d69b42581",
+          "chunk_no": 4,
+          "score": 0.2534845173358917
+        },
+        {
+          "id": "1ea1f83a8098d49b9bce688ed67410e12029b1299dbb5e29cb0f2b040ef5a464",
+          "source_id": "报销制度08_来源对照与发布确认清单.md",
+          "source_version": "V1.0-draft-7b4c68429f15",
+          "title": "来源对照、冲突处理与发布确认清单 / 五、维护与检索要求",
+          "content": "来源文件：报销制度08_来源对照与发布确认清单.md\n状态：企业适配草案（未签发）\n# 来源对照、冲突处理与发布确认清单\n\n版本：V1.0 ｜ 编制日期：2026年9月16日  \n本文件记录草案的证据边界，与其他制度同版本维护。\n\n## 五、维护与检索要求\n\n制度维护时保留旧版本，记录条款号、变更内容、生效日期和批准依据。知识库按文件标题、条款、版本、有效期和来源页码切分；保留“建议”“待确认”和冲突说明。回答金额问题时同时检索适用人员、费用类别、时间和例外，不能只召回一个金额便给出结论。",
+          "content_hash": "d2b89693f14b430be38a6a7dceee0f1c60e9b24606ae9439ec08674f2446df02",
+          "chunk_no": 5,
+          "score": 0.25271013379096985
+        },
+        {
+          "id": "bccd75e810cd9bdfe68dc45258c67f4c44aa1d2b0c8353318fa0f531dc4196d0",
+          "source_id": "报销制度05_日常经营费用报销细则.md",
+          "source_version": "V1.0-draft-7b4c68429f15",
+          "title": "日常经营费用报销细则 / 第五条 福利、工会和培训",
+          "content": "来源文件：报销制度05_日常经营费用报销细则.md\n状态：企业适配草案（未签发）\n# 日常经营费用报销细则\n\n制度编号：BX-05 ｜ 版本：V1.0 ｜ 状态：企业适配草案  \n依据：培训第8、38、63、79—83页；采购验收与资产登记流程为企业补充。\n\n## 第五条 福利、工会和培训\n\n福利附批准文件、发放或参加人员清单、发票及必要领用确认；食堂附期间、台账、采购清单、考勤、费用确认申请，培训原则上不接受食堂定额餐饮发票。\n\n工会活动按工会批准文件和预算执行，附费用明细及发放表，不与行政福利重复。结婚、生育等资格证明仅由授权人员核验，能记录核验结果的不广泛传播完整敏感证件。\n\n培训附批准文件、课程或通知、发票及参加证明；培训差旅另按02号。沿用培训第79页内部要求，不报销培训定制文化衫，新员工培训例外。考试费用还需准考证或报考信息及公司承担资格确认。\n\n培训原文涉及不得抵扣、进项转出的情形由财务逐项复核。本细则不依据费用名称自动计算税额，不因不能抵扣而自动扣减员工报销金额。",
+          "content_hash": "07e3a8b9647d7c279d84f6d1bc11b46a3267df661d281cf63a70a1b88e7bc7e4",
+          "chunk_no": 5,
+          "score": 0.24875928461551666
+        },
+        {
+          "id": "2f3a2226d6d5cf38ebf5499a57333f926355cf92afea6647378c3fb16e0d58b4",
+          "source_id": "报销制度04_借款与备用金管理办法.md",
+          "source_version": "V1.0-draft-7b4c68429f15",
+          "title": "借款与备用金管理办法 / 第一条 使用范围",
+          "content": "来源文件：报销制度04_借款与备用金管理办法.md\n状态：企业适配草案（未签发）\n# 借款与备用金管理办法\n\n制度编号：BX-04 ｜ 版本：V1.0 ｜ 状态：企业适配草案  \n依据：培训第8、48—49、83页；台账、额度适配及逾期控制为企业补充。\n\n## 第一条 使用范围\n\n借款用于不能直接对公支付且确有必要的公务支出，不作为个人借贷或长期占用资金工具。申请列明事项、项目、金额测算、用途、预计结清日期、借款人及收款账户。\n\n同一项目同一员工只允许一笔在途备用金。建议在途定义为已提交待批、已批准待支付、已支付未结清等有效借款；已驳回、已撤销且未付款的不计。付款未能确认成功或失败时不释放额度。",
+          "content_hash": "bd3fe3af0e03aafbac705b8c076d2dd082771205bfc9321404e347fd6cf89b5f",
+          "chunk_no": 1,
+          "score": 0.24479694664478302
+        }
+      ],
+      "reason": "Milvus 召回候选条款后，已由 MySQL 校验正文与当前制度版本。"
+    }
+  ],
+  "fields": {},
+  "case_id": "ea8a3d082cf548b8aeec68ee435b2320",
+  "report_id": "2b8d266d224a4ed99c56e980c9c31b77"
+}

@@ -1,0 +1,4 @@
+-r requirements.txt
+pymilvus>=2.6,<2.7
+sentence-transformers>=3,<6
+pymysql>=1.1,<2

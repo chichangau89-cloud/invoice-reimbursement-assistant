@@ -1,0 +1,247 @@
+{
+  "tenant_id": "e2e_82c23deb18a8",
+  "results": {
+    "import": {
+      "http": 200,
+      "body": {
+        "rows": 3
+      }
+    },
+    "list": {
+      "http": 200,
+      "body": [
+        {
+          "record_id": "dd4830121e650cb3d731e6fcb96ca542d0a19a0cef337c8acd9c8d952d83d92a",
+          "tenant_id": "e2e_82c23deb18a8",
+          "claim_no": "TEST-NORMAL",
+          "invoice_no": "TEST-INV-001",
+          "issue_date": "2026-09-16",
+          "buyer_name": "集成测试公司",
+          "seller_name": "集成测试酒店",
+          "total_amount": "680.00",
+          "currency": "CNY",
+          "created_at": "2026-09-16T01:04:17",
+          "updated_at": "2026-09-16T01:04:17"
+        },
+        {
+          "record_id": "d6a0d8742db2c621c8c69a908b23e7926128952d4005e6b9ccdf6591cef247ca",
+          "tenant_id": "e2e_82c23deb18a8",
+          "claim_no": "TEST-DUP-B",
+          "invoice_no": "TEST-INV-002",
+          "issue_date": "2026-09-16",
+          "buyer_name": "集成测试公司",
+          "seller_name": "集成测试酒店",
+          "total_amount": "680.00",
+          "currency": "CNY",
+          "created_at": "2026-09-16T01:04:17",
+          "updated_at": "2026-09-16T01:04:17"
+        },
+        {
+          "record_id": "e973fec60ba65679b1b7f7e5bffb02d53c8b66cc11d49edbcd73d37d0c49d927",
+          "tenant_id": "e2e_82c23deb18a8",
+          "claim_no": "TEST-DUP-A",
+          "invoice_no": "TEST-INV-002",
+          "issue_date": "2026-09-16",
+          "buyer_name": "集成测试公司",
+          "seller_name": "集成测试酒店",
+          "total_amount": "680.00",
+          "currency": "CNY",
+          "created_at": "2026-09-16T01:04:17",
+          "updated_at": "2026-09-16T01:04:17"
+        }
+      ]
+    },
+    "TEST-NORMAL": {
+      "http": 200,
+      "body": {
+        "claim_no": "TEST-NORMAL",
+        "tenant_id": "e2e_82c23deb18a8",
+        "decision": "approved",
+        "risk_level": "low",
+        "check_results": [
+          {
+            "check_type": "duplicate_invoice",
+            "status": "pass",
+            "risk_level": "low",
+            "message": "未发现同租户下相同发票号和开票日期的其他报销单。",
+            "evidences": [],
+            "suggestions": []
+          }
+        ],
+        "policy_hits": [],
+        "report_markdown": "# 报销单 TEST-NORMAL 审核报告\n- 租户：e2e_82c23deb18a8\n- 结论：approved\n- 风险等级：low\n\n## 检查结果\n- duplicate_invoice: pass，未发现同租户下相同发票号和开票日期的其他报销单。\n\n## 大模型辅助说明（以结构化规则结果为准）\n本次审核执行了重复发票检查，结果为通过。系统未发现同租户下存在相同发票号和开票日期的其他报销单，风险等级为低。未命中任何制度条款，无引用制度 ID。",
+        "llm_report": {
+          "status": "generated",
+          "model": "qwen3.5-plus",
+          "explanation": {
+            "summary": "本次审核执行了重复发票检查，结果为通过。系统未发现同租户下存在相同发票号和开票日期的其他报销单，风险等级为低。未命中任何制度条款，无引用制度 ID。",
+            "cited_policy_ids": []
+          },
+          "usage": {
+            "prompt_tokens": 311,
+            "total_tokens": 367,
+            "completion_tokens": 56
+          },
+          "error_code": null
+        }
+      }
+    },
+    "TEST-DUP-A": {
+      "http": 200,
+      "body": {
+        "claim_no": "TEST-DUP-A",
+        "tenant_id": "e2e_82c23deb18a8",
+        "decision": "rejected",
+        "risk_level": "high",
+        "check_results": [
+          {
+            "check_type": "duplicate_invoice",
+            "status": "fail",
+            "risk_level": "high",
+            "message": "发现同租户下相同发票号和开票日期的其他报销单。",
+            "evidences": [
+              {
+                "invoice_no": "TEST-INV-002",
+                "issue_date": "2026-09-16",
+                "matched_claims": [
+                  "TEST-DUP-B"
+                ]
+              }
+            ],
+            "suggestions": [
+              "核对是否重复报销"
+            ]
+          }
+        ],
+        "policy_hits": [],
+        "report_markdown": "# 报销单 TEST-DUP-A 审核报告\n- 租户：e2e_82c23deb18a8\n- 结论：rejected\n- 风险等级：high\n\n## 检查结果\n- duplicate_invoice: fail，发现同租户下相同发票号和开票日期的其他报销单。\n\n## 大模型辅助说明（以结构化规则结果为准）\n本次审核执行了重复发票检查规则。检查发现发票号 TEST-INV-002（开票日期 2026-09-16）在同租户下已存在于报销单 TEST-DUP-B 中，判定为重复报销风险，风险等级高。基于该检查结果，当前单据被拒绝。本次分析未引用任何制度条款。",
+        "llm_report": {
+          "status": "generated",
+          "model": "qwen3.5-plus",
+          "explanation": {
+            "summary": "本次审核执行了重复发票检查规则。检查发现发票号 TEST-INV-002（开票日期 2026-09-16）在同租户下已存在于报销单 TEST-DUP-B 中，判定为重复报销风险，风险等级高。基于该检查结果，当前单据被拒绝。本次分析未引用任何制度条款。",
+            "cited_policy_ids": []
+          },
+          "usage": {
+            "prompt_tokens": 356,
+            "total_tokens": 445,
+            "completion_tokens": 89
+          },
+          "error_code": null
+        }
+      }
+    },
+    "TEST-MISSING": {
+      "http": 200,
+      "body": {
+        "claim_no": "TEST-MISSING",
+        "tenant_id": "e2e_82c23deb18a8",
+        "decision": "manual_review",
+        "risk_level": "medium",
+        "check_results": [
+          {
+            "check_type": "invoice_presence",
+            "status": "review",
+            "risk_level": "medium",
+            "message": "未查询到该报销单的发票记录，需要补充发票或确认数据是否已导入。",
+            "evidences": [],
+            "suggestions": [
+              "上传或导入发票后重新审核"
+            ]
+          }
+        ],
+        "policy_hits": [],
+        "report_markdown": "# 报销单 TEST-MISSING 审核报告\n- 租户：e2e_82c23deb18a8\n- 结论：manual_review\n- 风险等级：medium\n\n## 检查结果\n- invoice_presence: review，未查询到该报销单的发票记录，需要补充发票或确认数据是否已导入。\n\n## 大模型辅助说明（以结构化规则结果为准）\n本次审核发现报销单缺少发票记录，状态标记为需人工复核。系统提示未查询到相关发票数据，建议用户上传或导入发票后重新提交审核。由于缺乏制度匹配项（policy_hits 为空），本次结论仅基于发票缺失这一事实，未引用任何具体制度条款。",
+        "llm_report": {
+          "status": "generated",
+          "model": "qwen3.5-plus",
+          "explanation": {
+            "summary": "本次审核发现报销单缺少发票记录，状态标记为需人工复核。系统提示未查询到相关发票数据，建议用户上传或导入发票后重新提交审核。由于缺乏制度匹配项（policy_hits 为空），本次结论仅基于发票缺失这一事实，未引用任何具体制度条款。",
+            "cited_policy_ids": []
+          },
+          "usage": {
+            "prompt_tokens": 325,
+            "total_tokens": 400,
+            "completion_tokens": 75
+          },
+          "error_code": null
+        }
+      }
+    },
+    "knowledge_import": {
+      "http": 200,
+      "body": {
+        "rows": 1
+      }
+    },
+    "knowledge_search": {
+      "http": 200,
+      "body": [
+        {
+          "id": "c3b4971ced5d67ba7a08683fabfbb6403bd3a438ac983b2dd8933c2017b6fddb",
+          "score": 0.6991631388664246,
+          "source_id": "TEST-POLICY-DUPLICATE",
+          "source_version": "test-v1",
+          "title": "仅用于集成测试的重复报销规则",
+          "content": "本条仅用于集成测试，不是真实企业制度。同一张发票不得在不同报销单重复报销；发现相同发票号码和开票日期时，应核对重复记录。"
+        }
+      ]
+    },
+    "audit_with_policy": {
+      "http": 200,
+      "body": {
+        "claim_no": "TEST-DUP-A",
+        "tenant_id": "e2e_82c23deb18a8",
+        "decision": "rejected",
+        "risk_level": "high",
+        "check_results": [
+          {
+            "check_type": "duplicate_invoice",
+            "status": "fail",
+            "risk_level": "high",
+            "message": "发现同租户下相同发票号和开票日期的其他报销单。",
+            "evidences": [
+              {
+                "invoice_no": "TEST-INV-002",
+                "issue_date": "2026-09-16",
+                "matched_claims": [
+                  "TEST-DUP-B"
+                ]
+              }
+            ],
+            "suggestions": [
+              "核对是否重复报销"
+            ]
+          }
+        ],
+        "policy_hits": [
+          {
+            "id": "c3b4971ced5d67ba7a08683fabfbb6403bd3a438ac983b2dd8933c2017b6fddb",
+            "score": 0.6991631388664246,
+            "source_id": "TEST-POLICY-DUPLICATE",
+            "source_version": "test-v1",
+            "title": "仅用于集成测试的重复报销规则",
+            "content": "本条仅用于集成测试，不是真实企业制度。同一张发票不得在不同报销单重复报销；发现相同发票号码和开票日期时，应核对重复记录。"
+          }
+        ],
+        "report_markdown": "# 报销单 TEST-DUP-A 审核报告\n- 租户：e2e_82c23deb18a8\n- 结论：rejected\n- 风险等级：high\n\n## 检查结果\n- duplicate_invoice: fail，发现同租户下相同发票号和开票日期的其他报销单。\n\n## 召回制度依据\n- 仅用于集成测试的重复报销规则（TEST-POLICY-DUPLICATE/test-v1，score=0.6992）\n\n## 大模型辅助说明（以结构化规则结果为准）\n本次检查执行了重复发票核验规则。结果显示，发票号 TEST-INV-002（开票日期 2026-09-16）在同租户下已存在于报销单 TEST-DUP-B 中，构成重复报销风险，因此审核结论为拒绝。该判断依据了召回的测试制度 c3b4971ced5d67ba7a08683fabfbb6403bd3a438ac983b2dd8933c2017b6fddb，该制度规定同一张发票不得在不同报销单重复报销。",
+        "llm_report": {
+          "status": "generated",
+          "model": "qwen3.5-plus",
+          "explanation": {
+            "summary": "本次检查执行了重复发票核验规则。结果显示，发票号 TEST-INV-002（开票日期 2026-09-16）在同租户下已存在于报销单 TEST-DUP-B 中，构成重复报销风险，因此审核结论为拒绝。该判断依据了召回的测试制度 c3b4971ced5d67ba7a08683fabfbb6403bd3a438ac983b2dd8933c2017b6fddb，该制度规定同一张发票不得在不同报销单重复报销。",
+            "cited_policy_ids": [
+              "c3b4971ced5d67ba7a08683fabfbb6403bd3a438ac983b2dd8933c2017b6fddb"
+            ]
+          },
+          "usage": {
+            "prompt_tokens": 513,
+            "total_tokens": 714,
+            "completion_tokens": 201
+          },
+          "error_code": null
+        }
+      }
+    }
+  }
+}

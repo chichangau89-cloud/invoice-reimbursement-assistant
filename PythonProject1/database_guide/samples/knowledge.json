@@ -1,0 +1,29 @@
+[
+  {
+    "tenant_id": "demo-company",
+    "source_id": "travel-policy",
+    "source_version": "demo-v1",
+    "chunk_no": 1,
+    "doc_type": "policy",
+    "title": "演示制度：住宿标准",
+    "content": "以下仅为教学样例，并非真实企业制度。普通员工在一线城市出差，住宿费标准为每人每天600元。超过标准时，须提供有效的超标准审批，否则进入人工复核。"
+  },
+  {
+    "tenant_id": "demo-company",
+    "source_id": "travel-policy",
+    "source_version": "demo-v1",
+    "chunk_no": 2,
+    "doc_type": "policy",
+    "title": "演示制度：市内交通材料",
+    "content": "以下仅为教学样例。市内交通报销应提供发票、行程单、出发地、目的地与业务事由。票据金额与报销金额不一致时，需要补充说明。"
+  },
+  {
+    "tenant_id": "demo-company",
+    "source_id": "subject-catalog",
+    "source_version": "demo-v1",
+    "chunk_no": 1,
+    "doc_type": "subject",
+    "title": "演示科目：差旅费-住宿费",
+    "content": "以下仅为教学样例。员工因公出差发生的酒店住宿费用，可按企业科目映射推荐差旅费-住宿费。是否使用该科目仍需结合企业科目表和费用归属确认。"
+  }
+]

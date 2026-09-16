@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>发票报销审核助手</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./policies.css" />
+  <link rel="stylesheet" href="./upload.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">✓</span><span>审核助手</span></div>
+      <nav class="nav" aria-label="主导航">
+        <a class="nav-item active" href="#dashboard"><span>▦</span>工作台</a>
+        <a class="nav-item" href="#upload"><span>↑</span>上传发票</a>
+        <a class="nav-item" href="#tasks"><span>☑</span>审核任务</a>
+        <a class="nav-item" href="#review"><span>◉</span>人工复核</a>
+        <a class="nav-item" href="#rules"><span>⚙</span>制度管理</a>
+      </nav>
+      <div class="sidebar-footer"><div class="user-avatar">王</div><div><strong>王财务</strong><small>财务审核主管</small></div><span class="more">•••</span></div>
+    </aside>
+
+    <main class="main" id="dashboard">
+      <header class="topbar"><div class="crumb">工作台 <span>/</span> 审核概览</div><div class="top-actions"><button class="icon-btn" aria-label="通知">♧<i></i></button><button class="icon-btn">?</button><button class="profile">王&nbsp; 王财务⌄</button></div></header>
+      <section class="content">
+        <div class="page-heading"><div><h1>工作台</h1><p>欢迎回来，王财务。以下是今日的审核概览。</p></div><div class="heading-actions"><button class="btn secondary" id="exportBtn">⇩ 导出报表</button><button class="btn primary" id="uploadBtn">＋ 上传材料</button></div></div>
+
+        <section class="stats-grid" aria-label="统计概览">
+          <article class="stat-card"><div class="stat-icon blue">▣</div><div><span>待审核任务</span><strong>24</strong><small class="neutral">较昨日 +3</small></div></article>
+          <article class="stat-card"><div class="stat-icon red">△</div><div><span>高风险预警</span><strong>12 <em>张</em></strong><small class="danger">需人工复核 5 张</small></div></article>
+          <article class="stat-card"><div class="stat-icon green">✓</div><div><span>本月已通过</span><strong>342 <em>张</em></strong><small class="success">同比增长 7.8%</small></div></article>
+          <article class="stat-card"><div class="stat-icon violet">▣</div><div><span>本月报销金额</span><strong>1,284,600 <em>元</em></strong><small class="success">较上月 +8.2%</small></div></article>
+        </section>
+
+        <section class="middle-grid">
+          <article class="panel alerts-panel"><div class="panel-title"><h2>风险提醒</h2><a href="#review">查看全部</a></div><div id="alerts"></div></article>
+          <article class="panel chart-panel"><div class="panel-title"><h2>审核结果分布</h2><span class="muted">本月</span></div><div class="chart-wrap"><div class="donut"><div><strong>436</strong><small>本月已处理</small></div></div><div class="legend"><div><i class="dot blue-dot"></i>已通过 <b>342</b><small>78.4%</small></div><div><i class="dot orange-dot"></i>待审核 <b>62</b><small>14.2%</small></div><div><i class="dot red-dot"></i>已驳回 <b>32</b><small>7.4%</small></div></div></div></article>
+        </section>
+
+        <section class="panel tasks-panel" id="tasks"><div class="panel-title"><div><h2>审核任务</h2><span class="task-count">全部 128</span><span class="task-count">待审核 12</span><span class="task-count">待复核 9</span></div><button class="link-btn">按风险排序 ↕</button></div><div class="table-scroll"><table><thead><tr><th>事由</th><th>报销人</th><th>费用类型</th><th>金额</th><th>提交时间</th><th>风险等级</th><th>操作</th></tr></thead><tbody id="taskRows"></tbody></table></div></section>
+        <section class="panel policy-panel" id="rules" aria-labelledby="policyHeading">
+          <div class="panel-title"><h2 id="policyHeading">制度文件</h2><span class="muted">已入库制度目录</span></div>
+          <p class="policy-intro">点击制度板块，从当前入库版本读取完整条款。当前文件为企业适配草案，未签发前仅可作为审核参考。</p>
+          <p id="policyStatus" role="status" aria-live="polite">正在读取制度目录…</p>
+          <div id="policyCatalog" class="policy-catalog" aria-label="制度文件目录"></div>
+          <div id="policyResults" aria-live="polite"></div>
+          <details class="policy-search-details">
+            <summary>按报销事项语义检索条款</summary>
+            <form id="policyForm" class="policy-search">
+              <label for="policyQuery">报销事项</label>
+              <input id="policyQuery" name="q" maxlength="200" value="住宿费用报销标准" placeholder="例如：出差住宿超标需要什么材料" required>
+              <button class="btn primary" id="policySearchBtn" type="submit">检索制度</button>
+            </form>
+          </details>
+        </section>
+        <section class="upload-workspace" id="upload" aria-labelledby="auditHeading">
+          <div class="upload-heading"><div><p class="eyebrow">智能审核引擎</p><h1 id="auditHeading">上传发票</h1><p>上传发票及附件，系统将识别材料并对照制度、历史记录进行合规校验。</p></div><div class="heading-actions"><button class="btn secondary" type="button" data-open-file>↥ 上传材料</button><button class="btn primary" type="button" data-open-file>＋ 上传发票</button></div></div>
+          <article class="upload-card"><div class="file-dropzone" id="fileDropZone" tabindex="0" role="button" aria-label="选择或拖拽审核材料上传"><div class="drop-icon">↥</div><h2>点击或拖拽文件到此区域上传</h2><p>支持发票、行程单、酒店水单、审批单等材料；单次最多 6 份。</p><button class="btn primary" type="button" data-open-file>选择文件</button><p class="file-tip">支持 PDF、PNG、JPG、JPEG 格式，单个文件不超过 10 MB</p></div><div class="upload-flow"><span>⌁ 智能 OCR 识别</span><span>◎ 多路数据召回</span><span>◈ 制度规则校验</span><span>▣ 输出审核结论</span></div></article>
+          <div class="upload-columns"><article class="panel audit-panel"><div class="panel-title"><h2>审核信息</h2><span class="muted">用于匹配适用制度</span></div><form id="auditForm"><div id="auditFields" class="audit-fields"></div><details><summary>更多业务信息（住宿、招待、借款与交通）</summary><div id="auditExtraFields" class="audit-fields"></div></details><button class="btn secondary" id="recheckBtn" type="submit" disabled>补充后重新审核本组材料</button></form></article><article class="panel material-panel"><div class="panel-title"><h2>材料与审核状态</h2><span class="muted">实时更新</span></div><p id="auditStatus" role="status" aria-live="polite">尚未选择审核材料。</p><div id="documentSummary" class="document-summary" aria-live="polite"></div><div class="material-note">识别结果、MySQL 精确查重和 Milvus 制度召回会分别展示；未确认信息不会自动判定通过。</div></article></div>
+          <section class="panel audit-result-panel"><div class="panel-title"><h2>审核结果</h2><span class="muted">需人工确认的事项将标记为复核</span></div><div id="auditResult"></div></section>
+        </section>
+      </section>
+    </main>
+  </div>
+  <input id="fileInput" type="file" accept="image/*,.pdf" multiple hidden />
+  <script src="./app.js"></script>
+  <script src="./audit.js"></script>
+</body>
+</html>

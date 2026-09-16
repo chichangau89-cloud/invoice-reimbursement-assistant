@@ -1,0 +1,174 @@
+{
+  "tenant_id": "claims_test_3c23604325ef",
+  "checks": [
+    {
+      "method": "POST",
+      "url": "/api/claims",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "url": "/api/claims",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "url": "/api/claims/TEST-001",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "url": "/api/audits/claims/MISSING/run",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "url": "/api/invoices/import",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/claims/TEST-001",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "/api/audits/claims/TEST-001/run",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/ab68407262a14fe2af282ebdd0ababae",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/ab68407262a14fe2af282ebdd0ababae",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "url": "/api/claims/TEST-001",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "url": "/api/claims/TEST-001",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "url": "/api/claims/TEST-001",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/ab68407262a14fe2af282ebdd0ababae",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "/api/audits/claims/TEST-001/run",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/claims/TEST-001",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "/api/audits/claims/TEST-001",
+      "status": 200
+    }
+  ],
+  "first_audit": {
+    "claim_no": "TEST-001",
+    "tenant_id": "claims_test_3c23604325ef",
+    "decision": "manual_review",
+    "risk_level": "medium",
+    "check_results": [
+      {
+        "check_type": "duplicate_invoice",
+        "status": "pass",
+        "risk_level": "low",
+        "message": "未发现同租户下相同发票号和开票日期的其他报销单。",
+        "evidences": [],
+        "suggestions": []
+      },
+      {
+        "check_type": "policy_retrieval",
+        "status": "review",
+        "risk_level": "medium",
+        "message": "制度知识库检索失败：<MilvusException: (code=2, message=Fail connecting to server on 192.168.10.155:19530, illegal connection params or server unavailable)>",
+        "evidences": [],
+        "suggestions": [
+          "检查 Milvus 服务、Embedding 模型和知识库同步状态"
+        ]
+      }
+    ],
+    "policy_hits": [],
+    "report_markdown": "# 报销单 TEST-001 审核报告\n- 租户：claims_test_3c23604325ef\n- 结论：manual_review\n- 风险等级：medium\n\n## 检查结果\n- duplicate_invoice: pass，未发现同租户下相同发票号和开票日期的其他报销单。\n- policy_retrieval: review，制度知识库检索失败：<MilvusException: (code=2, message=Fail connecting to server on 192.168.10.155:19530, illegal connection params or server unavailable)>\n\n## 大模型辅助说明（以结构化规则结果为准）\n本次审核中，重复发票检查已通过，未发现同租户下相同发票号和开票日期的其他报销单。但制度检索检查因 Milvus 服务连接失败（IP: 192.168.10.155:19530）而未能执行，导致无法匹配具体制度条款。由于缺乏制度依据进行自动判定，当前结论为人工复核，风险等级为中。",
+    "llm_report": {
+      "status": "generated",
+      "model": "qwen3.5-plus",
+      "explanation": {
+        "summary": "本次审核中，重复发票检查已通过，未发现同租户下相同发票号和开票日期的其他报销单。但制度检索检查因 Milvus 服务连接失败（IP: 192.168.10.155:19530）而未能执行，导致无法匹配具体制度条款。由于缺乏制度依据进行自动判定，当前结论为人工复核，风险等级为中。",
+        "cited_policy_ids": []
+      },
+      "usage": {
+        "total_tokens": 518,
+        "prompt_tokens": 417,
+        "completion_tokens": 101
+      },
+      "error_code": null
+    },
+    "audit_id": "ab68407262a14fe2af282ebdd0ababae",
+    "claim_version": 2,
+    "stale": false,
+    "created_at": "2026-09-16T01:16:17.203975",
+    "input_snapshot": {
+      "claim": {
+        "amount": "680.00",
+        "status": "draft",
+        "version": 2,
+        "claim_no": "TEST-001",
+        "currency": "CNY",
+        "tenant_id": "claims_test_3c23604325ef",
+        "created_at": "2026-09-16 01:15:41.765835",
+        "department": "测试部门",
+        "updated_at": "2026-09-16 01:15:42.529240",
+        "expense_type": "travel",
+        "applicant_name": "测试员工",
+        "approval_status": "pending",
+        "latest_audit_id": null,
+        "business_purpose": "集成测试，不是真实报销"
+      },
+      "request": {
+        "use_llm": true,
+        "tenant_id": "claims_test_3c23604325ef",
+        "policy_question": null
+      },
+      "invoices": [
+        {
+          "claim_no": "TEST-001",
+          "currency": "CNY",
+          "record_id": "b7568f8549b48c33442053f092f63b631b584864cc538807a682e89eb469f0a0",
+          "tenant_id": "claims_test_3c23604325ef",
+          "buyer_name": "测试公司",
+          "created_at": "2026-09-16 01:15:42",
+          "invoice_no": "TEST-INV-001",
+          "issue_date": "2026-09-16",
+          "updated_at": "2026-09-16 01:15:42",
+          "seller_name": "测试酒店",
+          "total_amount": "680.00"
+        }
+      ],
+      "attachments": [],
+      "rule_version": "duplicate-invoice-v1",
+      "pipeline_version": "claims-persistence-v1"
+    }
+  },
+  "second_audit_id": "ba0979997fa948a492b2e933448d5444",
+  "stale_audit_id": "13b1b3c655324a799e86ac7429c6ad16"
+}

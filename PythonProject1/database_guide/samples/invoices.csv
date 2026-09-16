@@ -1,0 +1,3 @@
+record_id,tenant_id,claim_no,invoice_no,issue_date,buyer_name,seller_name,total_amount,currency
+demo-invoice-001,demo-company,BX-DEMO-001,00000000000000000001,2026-09-01,演示公司,演示酒店,580.00,CNY
+demo-invoice-002,demo-company,BX-DEMO-002,00000000000000000002,2026-09-02,演示公司,演示交通公司,86.50,CNY
